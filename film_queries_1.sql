@@ -26,9 +26,17 @@ order by a.actor_id;
 
 --4. Obtén las películas cuyo idioma coincide con el idioma original.
 
-select title AS nombre_película, f.original_language_id AS idioma_original
-from film f 
-where original_language_id is null ;
+select 
+    f.title as pelicula,
+    l.name  as idioma,
+    COALESCE(ol.name, l.name) as idioma_original
+from film f
+join language l  on l.language_id = f.language_id
+left join language ol on ol.language_id = f.original_language_id
+where f.original_language_id is null
+   or f.language_id = f.original_language_id
+order by  f.title;
+
 
 
 --5. Ordena las películas por duración de forma ascendente.
@@ -39,15 +47,15 @@ order by f.length ASC ;
 --6. Encuentra el nombre y apellido de los actores que tengan ‘Allen’ en su apellido.
 
 select 
-    CONCAT(a.first_name, ' ', a.last_name) AS nombre_completo
+    CONCAT(a.first_name, ' ', a.last_name) as nombre_completo
 from actor a
-where  a.last_name = 'ALLEN';
+where a.last_name like '%ALLEN%';
 
 
 /*7. Encuentra la cantidad total de películas en cada clasificación 
 de la tabla“film” y muestra la clasificación junto con el recuento*/
 
-select rating, count(*) AS cant_total_peliculas
+select rating, COUNT(*) AS cant_total_peliculas
 from film f 
 group by f.rating 
 order by cant_total_peliculas DESC;
@@ -137,8 +145,11 @@ where length > 180
 order by length DESC;
 
 --15. ¿Cuánto dinero ha generado en total la empresa?
-select SUM(f.rental_rate ) as Ganancias_totales_empresa
-from film f ;
+
+select  
+    SUM(p.amount) AS Ganancias_totales_empresa
+from payment p;
+
 
 --16. Muestra los 10 clientes con mayor valor de id.
 

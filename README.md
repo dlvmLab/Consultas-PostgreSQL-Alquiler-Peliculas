@@ -283,9 +283,7 @@ join city c on a.city_id = c.city_id;
 
 ## ✒ Autora
 
-**Dayana Valdés**
-📧 [dvm.focus@gmail.com](mailto:dvm.focus@gmail.com)
-linkedin.com/in/dayanavm | github.com/dlvmLab
+Dayana Valdés 📧 dvm.focus@gmail.com 🔗 linkedin.com/in/dayanavm | github.com/dlvmLab
 
 > **Proyecto realizado como parte del módulo SQL – Máster en Data & Analytics V3 – The PowerMBA**
 > *Actualizado: 11 de enero de 2026*
